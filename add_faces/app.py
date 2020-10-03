@@ -15,30 +15,13 @@ def lambda_handler(event, context):
         }),
     }
 
-    event['body'] = base64.b64decode(event['body'])
+    body = base64.b64decode(event['body'])
     
-    # Decode multipart form-data
-    fp = io.BytesIO(event['body'])
-    pdict = cgi.parse_header(event['headers']['Content-Type'])[1]
-    if 'boundary' in pdict:
-        pdict['boundary'] = pdict['boundary'].encode('utf-8')
-    pdict['CONTENT-LENGTH'] = len(event['body'])
-    form_data = cgi.parse_multipart(fp, pdict)
-    
-
-    if '' not in form_data:
-        return {
-        "statusCode": 200,
-        "body": json.dumps({
-            "message": "no file",
-        }),
-    }
-
     # Load face detection cascade
     face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
     # Load image
-    np_img = np.frombuffer(form_data[''][0], dtype=np.uint8)
+    np_img = np.frombuffer(body, dtype=np.uint8)
     img = cv2.imdecode(np_img, cv2.IMREAD_COLOR)
 
     # Convert into grayscale

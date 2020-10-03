@@ -1,6 +1,11 @@
 ## AWS SAM Faces API
 
-This project is my attempt to learn how to use AWS SAM to build a REST API using Lambda.
+This project is an API to detect forward facing faces in an image.
+It uses OpenCV and a pretrained Haar Cascade model.
+
+### API
+POST /faces
+send the binary image in the body and it will be returned with rectangles arround the faces
 
 
 ## Resources
