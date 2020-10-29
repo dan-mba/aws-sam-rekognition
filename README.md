@@ -1,7 +1,7 @@
 ## AWS SAM Faces API
 
 This project is an API to detect forward facing faces in an image.
-It uses OpenCV and a pretrained Haar Cascade model.
+It uses OpenCV and Rekognition for detection. 
 
 ### API
 POST /faces

@@ -1,9 +1,9 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  aws-sam-opencv
+  aws-sam-rekognition
 
-  SAM Template for aws-sam-opencv
+  SAM Template for aws-sam-rekognition
 
 Globals:
   Function:
@@ -32,6 +32,8 @@ Resources:
       Layers:
         - !Ref OpencvLayer
       Runtime: python3.8
+      Policies:
+        - RekognitionDetectOnlyPolicy: {}
       MemorySize: 1024
       Events:
         AddFaces:
