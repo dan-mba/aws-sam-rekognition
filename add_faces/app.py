@@ -5,6 +5,7 @@ import numpy as np
 import boto3
 from botocore.exceptions import ClientError
 
+client = boto3.client('rekognition')
 
 def lambda_handler(event, context):
     if 'body' not in event:
@@ -16,13 +17,23 @@ def lambda_handler(event, context):
     }
 
     try:
-        body = base64.b64decode(event['body'])
+        img_bytes = event['body']
+        img_decoded = base64.b64decode(img_bytes)
 
         # Load image
-        np_img = np.frombuffer(body, dtype=np.uint8)
+        np_img = np.frombuffer(img_decoded, dtype=np.uint8)
         img = cv2.imdecode(np_img, cv2.IMREAD_COLOR)
 
-        # TODO Implement Rekognition detection
+        faces = client.detect_faces(
+            Image={
+                'Bytes': img_bytes
+            }
+        )
+
+        return {
+            "statusCode": "200",
+            "body": json.dumps(faces)
+        }
 
         # Draw rectangle around the faces TODO update for Rekognition
         for (x, y, w, h) in faces:
@@ -31,6 +42,11 @@ def lambda_handler(event, context):
         # Create return image
         output_img = cv2.imencode('.png',img)[1]
         output_img = base64.b64encode(output_img).decode('utf-8')
+    except ClientError as error:
+        return {
+            "statusCode": "200",
+            "body": json.dumps(error.response['Error'])
+        }
     except Exception as error:
         return {
             "statusCode": "200",
