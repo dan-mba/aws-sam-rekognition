@@ -1,2 +1,4 @@
 boto3
 botocore
+opencv-python-headless
+numpy
