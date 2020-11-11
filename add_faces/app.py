@@ -40,8 +40,8 @@ def lambda_handler(event, context):
 
             cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
 
-        # Create return image
-        output_img = cv2.imencode('.png',img)[1]
+        # Create return image (use 80 quality for faster transfer)
+        output_img = cv2.imencode('.jpg', img, [int(cv2.IMWRITE_JPEG_QUALITY), 80])[1]
         output_img = base64.b64encode(output_img).decode('utf-8')
     except ClientError as error:
         return {

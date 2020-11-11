@@ -29,8 +29,8 @@ Resources:
     Properties:
       CodeUri: add_faces/
       Handler: app.lambda_handler
-      # Layers:
-      #   - !Ref OpencvLayer
+      Layers:
+        - !Ref OpencvLayer
       Runtime: python3.8
       Policies:
         - RekognitionDetectOnlyPolicy: {}
@@ -42,17 +42,17 @@ Resources:
             Path: /faces
             Method: post
             ApiId: !Ref ApiResource
-  # OpencvLayer:
-  #   Type: AWS::Serverless::LayerVersion
-  #   Properties:
-  #     LayerName: aws-layer-opencv
-  #     Description: OpenCV Dependencies
-  #     ContentUri: ./opencv
-  #     CompatibleRuntimes:
-  #       - python3.8
-  #     RetentionPolicy: Delete
-  #   Metadata:
-  #     BuildMethod: python3.8
+  OpencvLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: aws-layer-opencv
+      Description: OpenCV Dependencies
+      ContentUri: ./opencv
+      CompatibleRuntimes:
+        - python3.8
+      RetentionPolicy: Delete
+    Metadata:
+      BuildMethod: python3.8
 
 Outputs:
   AddFacesApi:
