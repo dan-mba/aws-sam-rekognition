@@ -21,8 +21,11 @@ Resources:
           - post
           - options
         AllowOrigins:
-          - http://localhost:8080
+          - http://localhost:3000
           - https://dan-mba.github.io
+        AllowHeaders:
+          - content-type
+        MaxAge: 600
 
   AddFacesFunction:
     Type: AWS::Serverless::Function
