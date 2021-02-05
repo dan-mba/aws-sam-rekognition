@@ -1,0 +1,12 @@
+#dependabot config for pip
+
+version: 2
+updates:
+  - directory: "/add_faces"
+    package-ecosystem: "pip"
+    schedule:
+      interval: "weekly"
+  - directory: "/opencv"
+    package-ecosystem: "pip"
+    schedule:
+      interval: "weekly"
