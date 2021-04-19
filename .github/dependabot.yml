@@ -6,7 +6,9 @@ updates:
     package-ecosystem: "pip"
     schedule:
       interval: "weekly"
+      day: "wednesday"
   - directory: "/opencv"
     package-ecosystem: "pip"
     schedule:
       interval: "weekly"
+      day: "wednesday"
