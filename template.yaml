@@ -34,7 +34,7 @@ Resources:
       Handler: app.lambda_handler
       Layers:
         - !Ref OpencvLayer
-      Runtime: python3.11
+      Runtime: python3.14
       Policies:
         - RekognitionDetectOnlyPolicy: {}
       MemorySize: 1024
@@ -52,10 +52,10 @@ Resources:
       Description: OpenCV Dependencies
       ContentUri: ./opencv
       CompatibleRuntimes:
-        - python3.11
+        - python3.14
       RetentionPolicy: Delete
     Metadata:
-      BuildMethod: python3.11
+      BuildMethod: python3.14
 
 Outputs:
   AddFacesApi:
